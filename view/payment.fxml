@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="300" prefWidth="300" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="46.0" layoutY="49.0" text="결제금액">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="46.0" layoutY="96.0" text="계산 하시겠습니까?">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Label id="txtPay" layoutX="150.0" layoutY="48.0">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Label layoutX="229.0" layoutY="49.0" text="원">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button id="btnOk" layoutX="62.0" layoutY="209.0" mnemonicParsing="false" text="네">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button id="btnNo" layoutX="143.0" layoutY="209.0" mnemonicParsing="false" text="아니오">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <CheckBox id="cbMeSave" layoutX="27.0" layoutY="141.0" mnemonicParsing="false" />
+      <TextField id="txtMeSave" layoutX="46.0" layoutY="166.0" prefHeight="28.0" prefWidth="193.0" text="0" promptText="사용할 적립금액 입력" />
+      <Label id="laMeSave" layoutX="46.0" layoutY="138.0" prefHeight="25.0" prefWidth="241.0" text="적립금 조회하기" />
+   </children>
+</AnchorPane>
