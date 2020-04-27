@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+fx:controller="controller.MainController">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="메뉴">
+            <items>
+                  <MenuItem mnemonicParsing="false" text="로그아웃" onAction="#logout"/>
+              <MenuItem mnemonicParsing="false" text="종료" onAction="#exit"/>
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <TabPane fx:id="mainPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="메뉴" fx:id="menu">
+            <content>       
+              <fx:include fx:id="menuTab" source="/view/menuTab.fxml" />
+            </content>
+          </Tab>
+          <Tab text="출퇴근 관리" fx:id="work">
+            <content>
+              <fx:include fx:id="workTab" source="/view/workTab.fxml"/>
+            </content>
+          </Tab>
+            <Tab text="직원 관리" fx:id="staff">
+              <content>
+                <fx:include fx:id="staffTab" source="/view/staffTab.fxml" />
+              </content>
+            </Tab>
+            <Tab text="회원 관리" fx:id="member">
+              <content>
+                <fx:include fx:id="memberTab" source="/view/memberTab.fxml" />
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+</BorderPane>
