@@ -1,0 +1,53 @@
+package model;
+
+public class MemberVO {
+	private int me_no;
+	private String me_name;
+	private String me_phone;
+	private int me_save;
+	public int getMe_no() {
+		return me_no;
+	}
+	public void setMe_no(int me_no) {
+		this.me_no = me_no;
+	}
+	public String getMe_name() {
+		return me_name;
+	}
+	public void setMe_name(String me_name) {
+		this.me_name = me_name;
+	}
+	public String getMe_phone() {
+		return me_phone;
+	}
+	public void setMe_phone(String me_phone) {
+		this.me_phone = me_phone;
+	}
+	
+	
+	public int getMe_save() {
+		return me_save;
+	}
+	public void setMe_save(int me_save) {
+		this.me_save = me_save;
+	}
+	
+	
+	public MemberVO(int me_no, String me_name, String me_phone, int me_save) {
+		super();
+		this.me_no = me_no;
+		this.me_name = me_name;
+		this.me_phone = me_phone;
+		this.me_save = me_save;
+	}
+	public MemberVO() {
+		
+	}
+	@Override
+	public String toString() {
+		return "MemberVO [me_no=" + me_no + ", me_name=" + me_name + ", me_phone=" + me_phone + ", save=" + me_save + "]";
+	}
+	
+	
+	
+}
