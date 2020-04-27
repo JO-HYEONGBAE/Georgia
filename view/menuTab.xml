@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MenuTabController">
+	<children>
+		<TableView fx:id="sellTableView" layoutX="30.0" layoutY="23.0" onMouseClicked="#sellTableView" prefHeight="327.0" prefWidth="489.0">
+			<columns>
+				<TableColumn minWidth="0.0" prefWidth="0.0" text="번호" />
+				<TableColumn prefWidth="294.0" text="상품명" />
+				<TableColumn prefWidth="122.0" text="가격" />
+				<TableColumn prefWidth="72.0" text="수량" />
+      
+			</columns>
+		</TableView>
+		<Label layoutX="30.0" layoutY="398.0" text="결제금액" />
+		<TextField fx:id="txtPayment" layoutX="98.0" layoutY="393.0" prefHeight="28.0" prefWidth="150.0" text="0" />
+		<Label layoutX="30.0" layoutY="448.0" text="받은금액" />
+		<TextField fx:id="txtRecive" layoutX="98.0" layoutY="443.0" prefHeight="28.0" prefWidth="150.0" promptText="0" />
+		<Label layoutX="30.0" layoutY="493.0" text="거스름돈" />
+		<TextField fx:id="txtChange" layoutX="98.0" layoutY="488.0" prefHeight="28.0" prefWidth="150.0" text="0" />
+		<Label layoutX="30.0" layoutY="540.0" text="적립번호" />
+		<TextField fx:id="txtSave" onMouseClicked="#txtSave" layoutX="98.0" layoutY="535.0" prefHeight="28.0" prefWidth="150.0" text="1" />
+
+		<GridPane layoutX="254.0" layoutY="368.0" prefHeight="286.0" prefWidth="267.0" AnchorPane.bottomAnchor="46.0" AnchorPane.topAnchor="368.0">
+			<columnConstraints>
+				<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+				<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+				<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+				<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+			</columnConstraints>
+			<rowConstraints>
+				<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+				<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+				<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+				<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+			</rowConstraints>
+			<children>
+				<Button fx:id="btn9" mnemonicParsing="false" onAction="#btn9" prefHeight="75.0" prefWidth="74.0" text="9" GridPane.columnIndex="2" />
+				<Button fx:id="btn8" mnemonicParsing="false" onAction="#btn8" prefHeight="75.0" prefWidth="74.0" text="8" GridPane.columnIndex="1" />
+				<Button fx:id="btn7" mnemonicParsing="false" onAction="#btn7" prefHeight="75.0" prefWidth="74.0" text="7" />
+				<Button fx:id="btn6" mnemonicParsing="false" onAction="#btn6" prefHeight="75.0" prefWidth="74.0" text="6" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+				<Button fx:id="btn5" mnemonicParsing="false" onAction="#btn5" prefHeight="75.0" prefWidth="74.0" text="5" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+				<Button fx:id="btn4" mnemonicParsing="false" onAction="#btn4" prefHeight="75.0" prefWidth="74.0" text="4" GridPane.rowIndex="1" />
+				<Button fx:id="btn3" mnemonicParsing="false" onAction="#btn3" prefHeight="75.0" prefWidth="74.0" text="3" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+				<Button fx:id="btn2" mnemonicParsing="false" onAction="#btn2" prefHeight="75.0" prefWidth="74.0" text="2" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+				<Button fx:id="btn1" mnemonicParsing="false" onAction="#btn1" prefHeight="75.0" prefWidth="74.0" text="1" GridPane.rowIndex="2" />
+				<Button fx:id="btn0" mnemonicParsing="false" onAction="#btn0" prefHeight="75.0" prefWidth="74.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+				<Button fx:id="btn000" mnemonicParsing="false" onAction="#btn000" prefHeight="75.0" prefWidth="74.0" text="000" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+				<Button fx:id="btnMillon" mnemonicParsing="false" onAction="#btnMillon" prefHeight="75.0" prefWidth="74.0" text="만" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+				<Button fx:id="btnThousand" mnemonicParsing="false" onAction="#btnThousand" prefHeight="75.0" prefWidth="74.0" text="천" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+				<Button fx:id="btnHundred" mnemonicParsing="false" onAction="#btnHundred" prefHeight="75.0" prefWidth="74.0" text="백" GridPane.columnIndex="3" />
+				<Button fx:id="btnRemove" mnemonicParsing="false" onAction="#btnRemove" prefHeight="75.0" prefWidth="74.0" text="&lt;&lt;" GridPane.rowIndex="3" />
+					
+				<Button fx:id="btnRefund" mnemonicParsing="false" onAction="#btnRefund" prefHeight="75.0" prefWidth="74.0" text="C" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+			</children>
+		</GridPane>
+		<Button fx:id="btnSellTableSearch" layoutX="581.0" layoutY="593.0" mnemonicParsing="false" onAction="#btnSellTableSearch" text="판매 목록" />
+		
+		<Button fx:id="btnStockTableSearch" layoutX="714.0" layoutY="593.0" mnemonicParsing="false" onAction="#btnStockTableSearch" text="재고 목록" />
+			
+		<Button fx:id="btnMenuModify" layoutX="852.0" layoutY="593.0" mnemonicParsing="false" onAction="#btnMenuModify" text="메뉴 수정" />
+		<TableView fx:id="menuTableView" layoutX="547.0" layoutY="23.0" onMouseClicked="#menuTableView" prefHeight="538.0" prefWidth="428.0">
+			<columns>
+				<TableColumn minWidth="0.0" prefWidth="0.0" text="메뉴번호" />
+				<TableColumn prefWidth="233.0" text="상품명" />
+				<TableColumn prefWidth="130.0" text="가격" />
+				<TableColumn prefWidth="67.0" text="재고" />
+			</columns>
+		</TableView>
+		<Button fx:id="btnPayment" layoutX="157.0" layoutY="594.0" mnemonicParsing="false" onAction="#btnPayment" prefHeight="53.0" prefWidth="76.0" text="결제" />
+		<Button fx:id="btnReset" layoutX="30.0" layoutY="593.0" mnemonicParsing="false" onAction="#btnReset" prefHeight="54.0" prefWidth="96.0" text="전체취소" />
+      <Label fx:id="txtJob" layoutX="794.0" layoutY="636.0" prefHeight="22.0" prefWidth="44.0" text="직급">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="txtName" layoutX="889.0" layoutY="636.0" text="성명">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+	</children>
+</AnchorPane>
