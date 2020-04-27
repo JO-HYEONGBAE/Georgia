@@ -1,0 +1,284 @@
+package model;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+public class MemberDAO {
+   private static MemberDAO instance = null;
+
+   public static MemberDAO getInstance() {
+      if (instance == null)
+         instance = new MemberDAO();
+      return instance;
+   }
+
+   private MemberDAO() {
+   }
+
+   private Connection getConnection() throws Exception {
+      Connection con = DBUtil.getConnection();
+      return con;
+   }
+
+   /***************** 회원 구매정보 전체 조회 *********************/
+   public ArrayList<SellVO> getMemberSellTotalList(String searchWord) throws Exception {
+      StringBuffer sql = new StringBuffer();
+
+      sql.append("SELECT me_no,to_char(se_date,'yyyy-mm-dd:hh24:mi:ss')se_date,se_name,se_price FROM sell");
+      if (searchWord != null) {
+         sql.append(" WHERE me_no Like ?");
+      }
+      sql.append(" ORDER BY se_date desc");
+
+      Connection con = null;
+      PreparedStatement pstmt = null;
+      ResultSet rs = null;
+      SellVO sevo = null;
+      ArrayList<SellVO> list = new ArrayList<SellVO>();
+
+      try {
+         con = getConnection();
+         pstmt = con.prepareStatement(sql.toString());
+         if (searchWord != null) {
+            pstmt.setString(1, searchWord );
+         }
+         rs = pstmt.executeQuery();
+
+         while (rs.next()) {
+            sevo = new SellVO();
+
+            sevo.setMe_no(rs.getInt("me_no"));
+            sevo.setSe_date(rs.getString("se_date"));
+            sevo.setSe_name(rs.getString("se_name"));
+            sevo.setSe_price(rs.getInt("se_price"));
+
+            list.add(sevo);
+         }
+      } catch (SQLException se) {
+         System.out.println("쿼리 getMemberSellTotalList error = [" + se + "]");
+      } catch (Exception e) {
+         System.out.println("error = [" + e + "]");
+      } finally {
+         try {
+            if (rs != null)
+               rs.close();
+            if (pstmt != null)
+               pstmt.close();
+            if (con != null)
+               con.close();
+         } catch (SQLException se) {
+            System.out.println("디비 연동 해제 error = [" + se + "]");
+         }
+      }
+      return list;
+   }
+
+   /***************** 회원 정보 전체 조회 *********************/
+   public ArrayList<MemberVO> getMemberTotalList(String searchWord) throws Exception {
+      StringBuffer sql = new StringBuffer();
+      sql.append("SELECT me_no,me_name,me_phone,me_save FROM member");
+      if (searchWord != null) {
+         sql.append(" WHERE me_name Like ?");
+      }
+      sql.append(" ORDER BY me_no");
+
+      Connection con = null;
+      PreparedStatement pstmt = null;
+      ResultSet rs = null;
+      MemberVO mvo = null;
+      ArrayList<MemberVO> list = new ArrayList<MemberVO>();
+
+      try {
+         con = getConnection();
+         pstmt = con.prepareStatement(sql.toString());
+         if (searchWord != null) {
+            pstmt.setString(1, "%" + searchWord + "%");
+         }
+         rs = pstmt.executeQuery();
+
+         while (rs.next()) {
+            mvo = new MemberVO();
+
+            mvo.setMe_no(rs.getInt("me_no"));
+            mvo.setMe_name(rs.getString("me_name"));
+            mvo.setMe_phone(rs.getString("me_phone"));
+            mvo.setMe_save(rs.getInt("me_save"));
+
+            list.add(mvo);
+         }
+      } catch (SQLException se) {
+         System.out.println("쿼리 getMemberTotalList error = [ " + se + " ]");
+      } catch (Exception e) {
+         System.out.println("error = [ " + e + " ]");
+      } finally {
+         try {
+            if (rs != null)
+               rs.close();
+            if (pstmt != null)
+               pstmt.close();
+            if (con != null)
+               con.close();
+         } catch (SQLException se) {
+            System.out.println("디비 연동 해제 error = [ " + se + " ]");
+         }
+      }
+      return list;
+   }
+
+   /***************** 자동으로 회원 번호 부여 *********************/
+   public String getMemberNo() throws Exception {
+      StringBuffer sql = new StringBuffer();
+      sql.append("select nvl(lpad(max(to_number(ltrim(me_no,'0')))+1,2,'0'),'01') as memberno from member");
+      
+      Connection con = null;
+      PreparedStatement pstmt = null;
+      ResultSet rs = null;
+      
+      String memberNo ="";
+      
+      try {
+         con = getConnection();
+         pstmt = con.prepareStatement(sql.toString());
+         rs = pstmt.executeQuery();
+         if (rs.next()) {
+            memberNo = rs.getString("memberno");
+         }
+      }catch (SQLException se) {
+         System.out.println("쿼리 getMemberNo error = [ "+se+" ]");
+         se.printStackTrace();
+      } catch(Exception e) {
+         System.out.println("error = [ "+e+" ]");
+      } finally {
+         try {
+            if(rs != null) rs.close();
+            if(pstmt != null) pstmt.close();
+            if(con != null) con.close();
+         } catch(SQLException se) {
+            System.out.println("디비 연동 해제 error = [ "+se+" ]");
+         }
+      }
+      return memberNo;
+   }
+
+   /***************** 회원 등록 *********************/
+   public boolean membertInsert(MemberVO mvo) throws Exception{
+      StringBuffer sql = new StringBuffer();
+      sql.append("INSERT INTO  member (me_no,me_name, me_phone) VALUES (member_seq.NEXTVAL,?,?)");
+      
+      Connection con = null;
+      PreparedStatement pstmt = null;
+      boolean success = false;
+      
+      try {
+         con = getConnection();
+         
+         pstmt = con.prepareStatement(sql.toString());
+      
+         pstmt.setString(1, mvo.getMe_name());
+         pstmt.setString(2, mvo.getMe_phone());
+      
+         
+         int i = pstmt.executeUpdate();
+         if(i==1) success = true;
+      }catch (SQLException se) {
+         System.out.println("쿼리 membertInsert error = [ "+se+" ]");
+         success = false;
+      } catch (Exception e) {
+         System.out.println("error = [ "+e+" ]");
+         success = false;
+      } finally {
+         try {
+            if(pstmt != null) pstmt.close();
+            if(con != null) con.close();
+         }catch(SQLException se) {
+            System.out.println("디비 연동 해제 error = [ "+se+" ]");
+         }
+      }
+      return success;
+   }
+   
+   /***************** 회원 정보 수정 *********************/
+   public boolean memberUpdate(MemberVO mvo) throws Exception{
+      StringBuffer sql = new StringBuffer();
+      sql.append ( "UPDATE member SET me_name =?, me_phone=?  WHERE me_no=? ");
+      
+      Connection con = null;
+      PreparedStatement pstmt = null;
+      boolean success = false;
+      
+      try {
+         con = getConnection();
+         
+         pstmt = con.prepareStatement(sql.toString());
+         pstmt.setString(1, mvo.getMe_name());
+         pstmt.setString(2, mvo.getMe_phone());
+         pstmt.setInt(3, mvo.getMe_no());
+         
+         int i = pstmt.executeUpdate();
+         if(i==1) success = true;
+      }catch (SQLException se) {
+         System.out.println("쿼리 memberUpdate error = ["+se+" ]");
+         success = false;
+      }catch (Exception e) {
+         System.out.println("error = ["+e+" ]");
+         success = false;
+      }finally {
+         try {
+            if(pstmt != null)pstmt.close();
+            if(con != null)con.close();
+         }catch(SQLException se) {
+            System.out.println("디비 연동 해제 error = ["+se+" ]");
+         }
+      }   
+      return success;
+   }
+   
+   /***************** 회원 총 구매금액 *********************/
+   public int getSellTotal(int searchWord) throws Exception {
+      StringBuffer sql = new StringBuffer();
+      sql.append("SELECT sum(se_price) sellTotal FROM sell WHERE me_no= ?");
+      
+      Connection con = null;
+      PreparedStatement pstmt = null;
+      ResultSet rs = null;
+      
+      int totalPrice = 0;
+      
+      try {
+         con = getConnection();
+         pstmt = con.prepareStatement(sql.toString());
+         pstmt.setInt(1,searchWord);
+         rs = pstmt.executeQuery();
+         
+         if(rs.next()) {
+            totalPrice = rs.getInt("sellTotal");
+         }
+      }catch(SQLException se) {
+         System.out.println("쿼리 getSellTotal error = [ "+se+" ]");
+         se.printStackTrace();
+      }catch(Exception e) {
+         System.out.println("error = [ "+e+" ]");
+      }finally {
+         try {
+            if(rs != null) rs.close();
+            if(pstmt != null) pstmt.close();
+            if(con != null) con.close();
+         } catch(SQLException se) {
+            System.out.println("디비 연동 해제 error = [ "+se+" ]");
+         }
+      }
+   
+      return totalPrice;
+   }
+      
+      
+      
+      
+   }
+   
+
+
+   
