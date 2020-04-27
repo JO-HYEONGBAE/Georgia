@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500" prefWidth="900" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StockController">
+   <children>
+      <TableView fx:id="stockTableView" layoutX="39.0" layoutY="77.0" onMouseClicked="#stockTableView" prefHeight="346.0" prefWidth="496.0">
+        <columns>
+          <TableColumn minWidth="0.0" prefWidth="0.0" text="번호" />
+          <TableColumn prefWidth="264.0" text="품명" />
+            <TableColumn minWidth="0.0" prefWidth="0.0" text="가격" />
+            <TableColumn prefWidth="43.0" text="재고" />
+            <TableColumn minWidth="0.0" prefWidth="139.0" text="물품변동시간" />
+            <TableColumn prefWidth="49.0" text="현황" />
+        </columns>
+      </TableView>
+      <Label layoutX="408.0" layoutY="23.0" text="재고 현황">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="39.0" layoutY="40.0" text="이름">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtSearch" layoutX="81.0" layoutY="36.0" prefHeight="27.0" prefWidth="125.0" />
+      <Button fx:id="btnSearch" layoutX="221.0" layoutY="36.0" mnemonicParsing="false" onAction="#btnSearch" text="검색" />
+      <Button fx:id="btnAll" layoutX="278.0" layoutY="36.0" mnemonicParsing="false" onAction="#btnSearch" text="전체" />
+      <Button fx:id="btnClose" layoutX="428.0" layoutY="442.0" mnemonicParsing="false" onAction="#btnClose" text="닫기" />
+      <Label layoutX="585.0" layoutY="77.0" text="품명">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="585.0" layoutY="182.0" text="수량">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="585.0" layoutY="130.0" text="가격">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtName" layoutX="643.0" layoutY="74.0" promptText="품명" />
+      <TextField fx:id="txtPrice" layoutX="643.0" layoutY="126.0" promptText="가격" />
+      <TextField fx:id="txtAmount" onMouseClicked="#txtAmount" layoutX="643.0" layoutY="179.0" promptText="수량" />
+      <Label fx:id="job" layoutX="574.0" layoutY="278.0" text="관리자">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="name" layoutX="664.0" layoutY="277.0" text="조형배">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnWearing" layoutX="756.0" layoutY="276.0" mnemonicParsing="false" onAction="#btnWearing" prefHeight="27.0" prefWidth="70.0" text="입고" />
+      
+   </children>
+</AnchorPane>
